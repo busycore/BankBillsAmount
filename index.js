@@ -1,28 +1,40 @@
+/////////////////////////////////////////////////
+// Matheus V. 2021
+/////////////////////////////////////////////////
+
 const withdraw = (amount) => {
-  let oneHundredBills = 0;
-  let fiftyBills = 0;
-  let twentyBills = 0;
+  //Set-up the variables
+  let billsOfOneHundredAmount = 0;
+  let billsOfFiftyAmount = 0;
+  let billsOfTwentyAmount = 0;
 
   while (amount >= 100) {
+    //Check if the current operation will impact the next operation
+    //leading to an incorret withdraw
+    //If the value is lower, we will skip the operation
     if (amount - 100 < 50) {
       break;
     }
-    amount = amount - 100;
-    oneHundredBills++;
+
+    amount -= 100;
+    billsOfOneHundredAmount++;
   }
 
   while (amount >= 50) {
-    if ((amount - 100) % 20 === 0) {
+    //Check if the current operation will impact the next operation
+    //leading to an incorret withdraw
+    //We will skip the operation if the remaining of (current amt - 50) division's is not 0
+    if ((amount - 50) % 20 !== 0) {
       break;
     }
-    amount = amount - 50;
-    fiftyBills++;
+    amount -= 50;
+    billsOfFiftyAmount++;
   }
 
   while (amount >= 20) {
-    amount = amount - 20;
-    twentyBills++;
+    amount -= 20;
+    billsOfTwentyAmount++;
   }
-
-  return [oneHundredBills, fiftyBills, twentyBills];
+  
+  return [billsOfOneHundredAmount, billsOfFiftyAmount, billsOfTwentyAmount];
 };
